@@ -36,12 +36,7 @@ const routes = [
     meta: {
       authRequired: true,
     },
-  },
-  {
-    path: '/survey',
-    name: 'SurveyView',
-    component: () => import(/* webpackChunkName: "SurveyView" */ '../views/SurveyView.vue')
-  },
+  }
 ]
 
 const router = new VueRouter({

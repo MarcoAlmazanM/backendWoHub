@@ -66,7 +66,7 @@ export default {
           .then(() => {
             //alert('Registro hecho');
             firebase.firestore().collection('Users').doc(account["email"]).set(account).then(()=>{
-              this.$router.push('/survey');
+              this.$router.push('/home');
             });
           })
     },

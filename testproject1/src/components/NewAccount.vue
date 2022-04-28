@@ -2,27 +2,25 @@
   <v-container>
     <v-row dense align="center" justify="center" class="fill-height">
       <v-col cols="8">
-        <p class="blueTec--text text-center text-h4 font-weight-bold">CREA UNA CUENTA</p>
-        <v-text-field label="Nombre completo" placeholder="Escribe tu nombre completo" type="text" :rules="[rules.required]" v-model="nombre" outlined dense></v-text-field>
-        <v-text-field label="Matrícula" placeholder="Escribe tu matrícula" type="text" :rules="[rules.required]" v-model="matricula" outlined dense></v-text-field>
-        <v-text-field label="Correo Institucional" placeholder="Escribe tu correo institucional" type="text" :rules="[rules.required,emailRules.format]" v-model="correo" outlined dense></v-text-field>
-        <v-text-field label="Correo Personal" placeholder="Escribe tu correo" type="text" :rules="[rules.required, emailRules.format]" v-model="correoP" outlined dense></v-text-field>
-        <v-text-field label="Contraseña" placeholder="Escribe tu contraseña"
+        <p class="blueTec--text text-center text-h4 font-weight-bold">Crea una Cuenta</p>
+        <v-text-field label="Nombre Completo" placeholder="Nombre Completo" type="text"  v-model="name" outlined dense></v-text-field>
+        <v-text-field label="Email" placeholder="ejemplo@wohub.com" type="text"  v-model="email" outlined dense></v-text-field>
+        <v-text-field label="Teléfono" placeholder="5512345678" type="text"  v-model="phone" outlined dense></v-text-field>
+        <v-text-field label="Contraseña" placeholder="********"
                       :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[rules.required, rules.min]"
                       :type="showPass ? 'text' : 'password'"
                       name="input-pass"
-                      hint="Al menos 6 caractéres"
                       class="input-group--focused"
-                      @click:append="showPass = !showPass" v-model="clave" outlined dense></v-text-field>
-        <v-text-field label="Confirmar contraseña" placeholder="Vuelve a escribir tu contraseña"
+                      @click:append="showPass = !showPass" v-model="password" outlined dense></v-text-field>
+        <v-text-field label="Confirmar contraseña" placeholder="********"
                       :append-icon="showConfirm ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[rules.required, rules.min, passwordConfirmationRule]"
                       :type="showConfirm ? 'text' : 'password'"
                       name="input-pass2"
-                      hint="Al menos 6 caractéres"  @click:append="showConfirm = !showConfirm" v-model="copia" outlined dense></v-text-field>
-        <v-checkbox class="align-center justify-center" v-model="checkbox" :label="'Acepto los términos y condiciones'"></v-checkbox>
-        <v-btn :disabled="!checkbox" block color="blueTec" class="whiteTec--text" @click="registerAccount">Registrarse</v-btn>
+                      @click:append="showConfirm = !showConfirm" v-model="passwordconfirm" outlined dense></v-text-field>
+        <v-checkbox class="align-center justify-center" v-model="checkbox1" :label="'Políticas de Privacidad'"></v-checkbox>
+        <v-checkbox class="align-center justify-center" v-model="checkbox2" :label="'Términos & Condiciones'"></v-checkbox>
+        <v-checkbox class="align-center justify-center" v-model="checkbox3" :label="'Código de Conducta'"></v-checkbox>
+        <v-btn :disabled="!checkbox1 || !checkbox2 || !checkbox3" block color="blueTec" class="whiteTec--text" @click="registerAccount">Crear Cuenta</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -39,48 +37,35 @@ export default {
   name: "NewAccount",
   data(){
     return{
-      checkbox:false,
-      dialog: false,
+      checkbox1:false,
+      checkbox2:false,
+      checkbox3:false,
       showPass: false,
       showConfirm:false,
-      nombre:'',
-      matricula:'',
-      correo:'',
-      correoP:'',
-      clave:'',
-      copia:'',
-      rules: {
-        required: value => !!value || 'Valor requerido.',
-        min: v => v.length >= 6 || 'Min 6 caractéres',
+      name:'',
+      email:'',
+      phone:'',
+      password:'',
+      passwordconfirm:''
 
-        //emailMatch: () => (`The email and password you entered don't match`),
-      },
-      emailRules: {
-        format: v => /.+@.+/.test(v) || "El formato debe de ser válido"
-      },
-    }
-  },
-  computed:{
-    passwordConfirmationRule(){
-      return (this.clave===this.copia || "Las contraseñas no coinciden")
     }
   },
   methods:{
     registerAccount() {
       const users={
-        email: this.correo.toString().charAt(0).toUpperCase()+this.correo.toString().slice(1),
-        key: this.clave.toString(),
+        email: this.email.toString(),
+        password: this.password.toString()
       }
       const account = {
-        name: this.nombre.toString(),
-        id: this.matricula.toString(),
-        personal: this.correoP.toString(),
+        email: this.email.toString(),
+        name: this.name.toString(),
+        phone: this.phone.toString()
       }
       //registra la informacion
-      firebase.auth().createUserWithEmailAndPassword(users["email"], users["key"])
+      firebase.auth().createUserWithEmailAndPassword(users["email"], users["password"])
           .then(() => {
             //alert('Registro hecho');
-            firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set(account).then(()=>{
+            firebase.firestore().collection('Users').doc(account["email"]).set(account).then(()=>{
               this.$router.push('/home');
             });
           })

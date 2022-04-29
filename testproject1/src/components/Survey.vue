@@ -8,7 +8,7 @@
         <v-select :items="improvements" @change="imp" label="¿Qué buscas mejorar?" solo></v-select>
         <v-select :items="exercise_location" @change="loc" label="¿Dónde haces ejercicio?" solo></v-select>
         <v-select :items="available_time" @change="tim" label="Tiempo disponible para hacer ejercicio" solo></v-select>
-        <v-text-field label="Deportes de interés (enlistalos)" @change="sports" solo></v-text-field>
+        <v-text-field label="Deportes de interés (enlistalos) " v-model="sports_interests" solo></v-text-field>
         <v-btn block color="blueTec" class="whiteTec--text" @click="setInterests" >Actualizar intereses</v-btn>
       </v-col>
     </v-row>
@@ -27,12 +27,12 @@ import 'firebase/storage';
       improvements: ['Mejorar salud en general', 'Perder peso', 'Ganar musculatura'],
       exercise_location: ['Casa', 'Oficina', 'Gimnasio'],
       available_time: ['30 minutos', '1 hora', '2 horas'],
-      sport_interests: [],
       level: '',
       favorite: '',
       improvement: '',
       location: '',
-      time: ''
+      time: '',
+      sports_interests:''
     }
     ),
     methods:{
@@ -52,28 +52,24 @@ import 'firebase/storage';
       tim(event) {
         this.time = event;
       },
-      sports(event) {
-        this.sport_interests.push(event);
-      },
 
       setInterests() {
 
-        const map = new Map();
+        const interestsMap = new Map();
 
-        map.set('Level', this.level);
-        map.set('Favorite exercise', this.favorite);
-        map.set('Improvements', this.improvement);
-        map.set('Location', this.location);
-        map.set('Availability', this.time);
-        map.set('Sport Interests', this.sport_interests);
+        interestsMap.set('Level', this.level);
+        interestsMap.set('Favorite exercise', this.favorite);
+        interestsMap.set('Improvements', this.improvement);
+        interestsMap.set('Location', this.location);
+        interestsMap.set('Availability', this.time);
+        interestsMap.set('Sport Interests', this.sports_interests.split(","));
 
-        console.log(firebase.auth().currentUser.email);
-        console.log(map);
-
-        const obj = Object.fromEntries(map);
+        const interests = Object.fromEntries(interestsMap);
 
         //updates interests
-        firebase.firestore().collection('Users').doc(firebase.auth().currentUser.email).update(obj)
+        firebase.firestore().collection('Users').doc(firebase.auth().currentUser.email).update({
+          interests:interests,
+        })
           .then(() => {
             this.$router.push('/home');
           });

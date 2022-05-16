@@ -1,18 +1,15 @@
 <template>
-
- <Settings></Settings>
-
+ <div>
+ </div>
 </template>
 
 <script>
 
 
-import Settings from "../components/Settings";
 export default {
 
   name: "SubMenu",
   components: {
-    Settings
 
   },
 }

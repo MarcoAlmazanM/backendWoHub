@@ -34,15 +34,22 @@ Marco Antonio Almazán Martínez A01769046
              src="https://firebasestorage.googleapis.com/v0/b/fir-ideentest.appspot.com/o/Perfil%2Flogout-variant.svg?alt=media&token=af4d2ed3-65f7-4285-bf4e-de0a66549613"
              class="mb-2 outPage pa-1 mb-1"></v-img>
     </v-app-bar>
+    
     <v-main>
+      <Settings v-if="log"></Settings>
       <router-view></router-view>
 
     </v-main>
   </v-app>
+
+
+
 </template>
 
 <script>
 import firebase from 'firebase';
+import Settings from "@/components/Settings";
+
 export default {
   data(){
     return {
@@ -80,6 +87,9 @@ export default {
       });
     }
   },
+  components: {
+    Settings
+  }
 };
 </script>
 <style>

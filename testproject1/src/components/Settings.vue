@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <v-app-bar elevation="0" outlined color="grayTec" bottom>
-      <router-link v-if="!log" to="/" >
-        <v-img max-height="100" max-width="180"
-               src="https://firebasestorage.googleapis.com/v0/b/fir-ideentest.appspot.com/o/Perfil%2FlogoTec.png?alt=media&token=4263dc00-eab5-495e-af9d-be5d55ec5593"
-               class="mb-2"></v-img>
-      </router-link>
-
-    </v-app-bar>
-  </div>
+  <v-toolbar app elevation="0"  color="grayTec" >
+    <v-spacer></v-spacer>
+    <router-link style="text-decoration: none; " to="/"><p class="whiteTec--text text-h6 pa-1 mb-1">Personal Info</p></router-link>
+    <v-spacer></v-spacer>
+    <router-link style="text-decoration: none; " to="/"><p class="whiteTec--text text-h6 pa-1 mb-1">Career Awards</p></router-link>
+    <v-spacer></v-spacer>
+    <router-link style="text-decoration: none; " to="/"><p class="whiteTec--text pa-1 mb-1 text-h6">Resume</p></router-link>
+    <v-spacer></v-spacer>
+  </v-toolbar>
 </template>
 
 <script>

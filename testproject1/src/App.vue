@@ -35,11 +35,8 @@ Marco Antonio Almazán Martínez A01769046
              class="mb-2 outPage pa-1 mb-1"></v-img>
     </v-app-bar>
     <v-main>
-      <v-container fluid>
-        <div>
-          <router-view></router-view>
-        </div>
-      </v-container>
+      <router-view></router-view>
+
     </v-main>
   </v-app>
 </template>

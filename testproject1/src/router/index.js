@@ -41,6 +41,11 @@ const routes = [
     path: '/survey',
     name: 'SurveyView',
     component: ()=> import(/* webpackChunkName: "SurveyView" */ '../views/SurveyView.vue')
+  },
+  {
+    path: '/submenu',
+    name: 'SubMenu',
+    component: ()=> import(/* webpackChunkName: "SurveyView" */ '../views/SubMenu.vue')
   }
 ]
 

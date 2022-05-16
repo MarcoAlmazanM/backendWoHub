@@ -29,7 +29,7 @@ Marco Antonio Almazán Martínez A01769046
       <router-link v-if="!log" to="/" ><p class="whiteTec--text text-body-2 pa-2 mb-1">INICIAR SESIÓN</p></router-link>
       <router-link v-if="!log" to="/register"><p class="whiteTec--text text-body-2 pa-1 mb-1">REGISTRARSE</p></router-link>
       <router-link v-if="log" to="/home"><p class="whiteTec--text text-body-2 pa-2 mb-1">INFORMACIÓN DEL ALUMNO</p></router-link>
-      <router-link v-if="log" to="/courses"><p class="whiteTec--text text-body-2 pa-1 mb-1">MATERIAS</p></router-link>
+      <router-link v-if="log" to="/submenu"><p class="whiteTec--text text-body-2 pa-1 mb-1">SETTINGS</p></router-link>
       <v-img v-if="log" @click="logout" max-height="30" max-width="30"
              src="https://firebasestorage.googleapis.com/v0/b/fir-ideentest.appspot.com/o/Perfil%2Flogout-variant.svg?alt=media&token=af4d2ed3-65f7-4285-bf4e-de0a66549613"
              class="mb-2 outPage pa-1 mb-1"></v-img>

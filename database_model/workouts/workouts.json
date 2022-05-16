@@ -1,0 +1,16 @@
+{
+    "id"                 : "String",
+    "coach_email"        : "Reference(Coach)",
+    "title"              : "String",
+    "creation_date"      : "Timestamp",
+    "publish_date"       : "Timestamp",
+    "visibility"         : "Boolean",
+    "difficulty"         : "String",
+    "muscular_focus"     : "String",
+    "type"               : "String",
+    "required_equipment" : "String",
+    "media"              : "Map('Video': 'String', 'Cover': 'String')",
+    "income"             : "Number",
+    "views"              : "Number",
+    "tags"               : "Array[String]"
+}

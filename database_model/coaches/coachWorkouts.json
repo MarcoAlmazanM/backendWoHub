@@ -1,0 +1,4 @@
+{
+    "coach_email": "String",
+    "creation_date": "Timestamp"
+}

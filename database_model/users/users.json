@@ -1,0 +1,20 @@
+{
+    "email"        : "String",
+    "name"         : "String",
+    "username"     : "String",
+    "phone"        : "Number",
+    "birthdate"    : "Timestamp",
+    "height"       : "Number",
+    "weight"       : "Number",
+    "gender"       : "String",
+    "interests"    : "Map('Level': 'String', 'Favorite exercise': 'String', 'Improvements': 'String', 'Location': 'String', 'Availability': 'String', 'Sport Interests': Array[String])",
+    "member_since" : "Timestamp",
+    "spotify_id"   : "String",
+    "devices_id"   : "Array[String]",
+    "account_type" : "String",
+    "workout_schedule"   : "Array[Map('Date': 'String', 'Time': 'String')]",
+    "stripe_customer_id" : "String",
+    "userfollows"        : "Subcollection",
+    "usernotifications"  : "Subcollection",
+    "usercalendar"       : "Subcollection" 
+}

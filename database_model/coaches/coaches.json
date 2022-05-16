@@ -1,0 +1,22 @@
+{
+    "email"    : "String",
+    "username" : "String",
+    "phone"    : "Number",
+    "location" : "Map('City': 'String', 'Country': 'String')",
+    "resume"   : "String",
+    "career"   : "Array[String]",
+    "avatar"   : "String",
+    "followers_number"            : "Number",
+    "workouts_number"             : "Number",
+    "member_since"                : "Timestamp",
+    "stripe_customer_id"          : "String",
+    "stripe_custom_account_id"    : "String",
+    "current_month_payout_amount" : "Number",
+    "available_amount"         : "Number",
+    "devices_id"               : "Array[String]",
+    "waiting_for_availability" : "Number",
+    "coachpayouts"       : "Subcollection",
+    "coachworkouts"      : "Subcollection",
+    "coachplaylists"     : "Subcollection",
+    "coachnotifications" : "Subcollection"
+}

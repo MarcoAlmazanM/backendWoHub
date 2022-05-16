@@ -1,0 +1,7 @@
+{
+    "id": "String",
+    "type": "Number",
+    "message": "String",
+    "date": "Timestamp",
+    "read": "Boolean"
+}

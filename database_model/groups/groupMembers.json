@@ -1,0 +1,6 @@
+{
+    "member_id": "String",
+    "member_since": "String",
+    "posts_number": "Number",
+    "comments_number": "Number"
+}

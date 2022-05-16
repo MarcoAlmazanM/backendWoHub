@@ -1,0 +1,7 @@
+{
+    "id": "String",
+    "creator_id": "String",
+    "creator_name": "String",
+    "message": "String",
+    "publish_date": "Timestamp"
+}

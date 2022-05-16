@@ -1,0 +1,9 @@
+{
+    "id"           : "String",
+    "coach_email"  : "Reference(Coach)",
+    "coach_name"   : "String",
+    "copy-out"     : "String",
+    "publish_date" : "Timestamp",
+    "likes"        : "Number",
+    "files"        : "Array[String]"
+}

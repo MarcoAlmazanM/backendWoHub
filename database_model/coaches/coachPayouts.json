@@ -1,0 +1,6 @@
+{
+    "id": "String",
+    "request_date": "Timestamp",
+    "payout_amount": "Number",
+    "status": "String"
+}

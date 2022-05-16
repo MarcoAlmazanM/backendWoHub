@@ -1,0 +1,13 @@
+{
+    "id"             : "String",
+    "name"           : "String",
+    "description"    : "String",
+    "creation_date"  : "Timestamp",
+    "cover"          : "String",
+    "members_number" : "Number",
+    "location"       : "Map('City': 'String', 'Country': 'String')",
+    "creator"        : "String",
+    "creator_name"   : "String",
+    "groupmembers": "Subcollection",
+    "groupposts": "Subcollection"
+}

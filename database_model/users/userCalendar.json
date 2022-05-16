@@ -1,0 +1,7 @@
+{
+    "id": "String",
+    "workout_id": "String",
+    "workout_name": "String",
+    "date": "Timestamp",
+    "read": "Boolean"
+}

@@ -1,0 +1,4 @@
+{
+    "coach_email": "String",
+    "following_date": "Timestamp"
+}

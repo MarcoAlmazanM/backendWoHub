@@ -1,0 +1,8 @@
+{
+    "coach_email": "String",
+    "creation_date": "Timestamp",
+    "last_update": "Timestamp",
+    "title": "String",
+    "income": "Number",
+    "workout": "Array[String]"
+}

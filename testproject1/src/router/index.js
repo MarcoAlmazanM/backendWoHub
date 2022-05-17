@@ -51,6 +51,11 @@ const routes = [
     path: '/submenu',
     name: 'SubMenu',
     component: ()=> import(/* webpackChunkName: "SurveyView" */ '../views/SubMenu.vue')
+  },
+  {
+    path: '/personal',
+    name: 'PersonalScreen',
+    component: ()=> import(/* webpackChunkName: "PersonalScreen" */ '../views/PersonalScreen.vue')
   }
 ]
 

@@ -29,14 +29,14 @@
           myarr: [],
         }),
     mounted() {
-      //let user=result.toString().charAt(0).toUpperCase()+result.slice(1);
+
       this.getStudentsInfo(firebase.auth().currentUser.email);
     },
     methods:{
       async getStudentsInfo(user) {
 
-        const student = await firebase.firestore().collection("Coaches").doc(user).get();
-        this.data = student.data();
+        const coach = await firebase.firestore().collection("Coaches").doc(user).get();
+        this.data = coach.data();
         this.email = this.data.email;
         this.username = this.data.username;
         this.phone = this.data.phone;
@@ -65,8 +65,6 @@
         locationMap.set('City', this.myarr[0]);
         locationMap.set('Country', this.myarr[1]);
         const location = Object.fromEntries(locationMap);
-
-        console.log(location);
 
         //updates interests
         firebase.firestore().collection('Coaches').doc(firebase.auth().currentUser.email).update({

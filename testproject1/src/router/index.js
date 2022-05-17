@@ -56,6 +56,11 @@ const routes = [
     path: '/personal',
     name: 'PersonalScreen',
     component: ()=> import(/* webpackChunkName: "PersonalScreen" */ '../views/PersonalScreen.vue')
+  },
+  {
+    path: '/careerawards',
+    name: 'CareerAwardsView',
+    component: ()=> import(/* webpackChunkName: "CareerAwardsView" */ '../views/CareerAwardsView.vue')
   }
 ]
 

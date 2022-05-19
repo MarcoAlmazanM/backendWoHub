@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar elevation="0"  color="grayTec" >
+  <v-app-bar elevation="0"  color="grayTec" app  clipped-right>
     <v-spacer></v-spacer>
     <router-link style="text-decoration: none; " to="/personal"><p class="whiteTec--text text-h6 pa-1 mb-1">Personal Info</p></router-link>
     <v-spacer></v-spacer>

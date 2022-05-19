@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <StudentProfile></StudentProfile>
-  </div>
+    <UserProfile></UserProfile>
 </template>
 
 <script>
-import StudentProfile from '@/components/StudentProfile'
+
+import UserProfile from "../components/UserProfile";
 export default {
   name: 'Home',
   components: {
-    StudentProfile,
+    UserProfile
+
   },
 };
 </script>

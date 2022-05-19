@@ -23,7 +23,7 @@ import firebase from "firebase"
 import Profile from "@/components/Forms/Profile";
 
 export default {
-  name: "StudentProfile",
+  name: "UserProfile",
   components: {
     Profile,
   },

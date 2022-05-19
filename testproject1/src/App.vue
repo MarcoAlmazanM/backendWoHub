@@ -1,45 +1,51 @@
 <!--
-Ángel Nolasco Serrano A01365726
 Marco Antonio Almazán Martínez A01769046
  -->
 <template>
-  <!--<div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/register">Register</router-link> |
-      <router-link to="/dashboard">Dashboard</router-link> |
-      <button @click="logout">Logout</button>
-    </div>
-    <router-view />
-  </div>-->
   <v-app>
-    <v-app-bar app elevation="0" outlined color="blueTec">
-      <router-link v-if="!log" to="/" >
-        <v-img max-height="100" max-width="180"
-               src="https://firebasestorage.googleapis.com/v0/b/fir-ideentest.appspot.com/o/Perfil%2FlogoTec.png?alt=media&token=4263dc00-eab5-495e-af9d-be5d55ec5593"
-               class="mb-2"></v-img>
-      </router-link>
-      <router-link v-if="log" to="/home" >
-        <v-img max-height="100" max-width="180"
-               src="https://firebasestorage.googleapis.com/v0/b/fir-ideentest.appspot.com/o/Perfil%2FlogoTec.png?alt=media&token=4263dc00-eab5-495e-af9d-be5d55ec5593"
-               class="mb-2"></v-img>
-      </router-link>
 
-      <v-spacer></v-spacer>
-      <router-link v-if="!log" to="/" ><p class="whiteTec--text text-body-2 pa-2 mb-1">INICIAR SESIÓN</p></router-link>
-      <router-link v-if="!log" to="/register"><p class="whiteTec--text text-body-2 pa-1 mb-1">REGISTRARSE</p></router-link>
-      <router-link v-if="log" to="/home"><p class="whiteTec--text text-body-2 pa-2 mb-1">INFORMACIÓN DEL ALUMNO</p></router-link>
-      <router-link v-if="log"  to="/submenu"><p class="whiteTec--text text-body-2 pa-1 mb-1">SETTINGS</p></router-link>
-      <v-img v-if="log" @click="logout" max-height="30" max-width="30"
-             src="https://firebasestorage.googleapis.com/v0/b/fir-ideentest.appspot.com/o/Perfil%2Flogout-variant.svg?alt=media&token=af4d2ed3-65f7-4285-bf4e-de0a66549613"
-             class="mb-2 outPage pa-1 mb-1"></v-img>
-    </v-app-bar>
-    
-    <v-main>
-      <Settings v-if="log"></Settings>
-      <router-view></router-view>
+    <PrincipalNavBar v-if="!log"></PrincipalNavBar>
+    <Settings v-if="this.$route.path == '/careerawards' || this.$route.path == '/personal'|| this.$route.path == '/resume'"></Settings>
 
+    <v-navigation-drawer permanent app color="blueTec" v-if="log">
+      <v-list dense>
+      <v-header class="whiteTec--text text-h6 pa-16 ma-5">MENU</v-header>
+      <v-list-item-group color="primary">
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon class="whiteTec--text">mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link  to="/home" style="text-decoration: none; "><v-list-item-title class="whiteTec--text text-body-1 ">Home</v-list-item-title></router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item >
+          <v-list-item-icon>
+            <v-icon class="whiteTec--text">mdi-cog</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link  to="/careerawards" style="text-decoration: none; "><v-list-item-title class="whiteTec--text text-body-1 ">Settings</v-list-item-title></router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="logout">
+          <v-list-item-icon>
+            <v-icon class="whiteTec--text">mdi-login-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="whiteTec--text text-body-1 ">Sign Out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+    </v-navigation-drawer>
+
+    <v-main class="mt-5">
+      <v-container fluid >
+        <router-view></router-view>
+      </v-container>
     </v-main>
+
+
   </v-app>
 
 
@@ -48,7 +54,9 @@ Marco Antonio Almazán Martínez A01769046
 
 <script>
 import firebase from 'firebase';
-import Settings from "@/components/Settings";
+import Settings from "./components/Settings";
+import PrincipalNavBar from "./components/PrincipalNavBar";
+
 
 export default {
   data(){
@@ -61,21 +69,14 @@ export default {
   },
   methods: {
     logout() {
-      firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            //alert('Sesion cerrada');
+      firebase.auth().signOut().then(() => {
             this.$router.push('/');
           })
           .catch(() => {
-            //alert(error.message);
             this.$router.push('/');
           });
     },
     async getUser(){
-      //console.log(firebase.auth().currentUser);
-      //const user=firebase.auth().currentUser;
       firebase.auth().onAuthStateChanged((user)=>{
         if(user){
           this.log=true;
@@ -87,8 +88,11 @@ export default {
       });
     }
   },
+
   components: {
+    PrincipalNavBar,
     Settings
+
   }
 };
 </script>

@@ -7,7 +7,6 @@
     </router-link>
     <v-spacer></v-spacer>
     <router-link  to="/" ><p class="whiteTec--text text-body-2 pa-2 mb-1">INICIAR SESIÓN</p></router-link>
-    <router-link  to="/register"><p class="whiteTec--text text-body-2 pa-1 mb-1">REGISTRARSE</p></router-link>
   </v-app-bar>
 </template>
 

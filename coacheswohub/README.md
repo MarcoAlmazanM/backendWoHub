@@ -1,4 +1,4 @@
-# testproject1
+# Coaches Wohub
 
 ## Project setup
 ```

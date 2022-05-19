@@ -76,14 +76,7 @@ router.beforeEach((to, from, next) => {
         });
       }
     });
-    // if (firebase.auth().currentUser.onAuthStateChanged) {
-    //   next();
-    // } else {
-    //   alert('You must be logged in to see this page');
-    //   next({
-    //     path: '/',
-    //   });
-    // }
+
   } else {
     next();
   }

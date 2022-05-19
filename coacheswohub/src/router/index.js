@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import LogIn from '../views/LogIn.vue'
 import firebase from 'firebase';
 
 Vue.use(VueRouter);
@@ -8,8 +7,11 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Login',
-    component: LogIn
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/Home.vue'),
+    meta: {
+      authRequired: true,
+    },
   },
   {
     path: '/courses',
@@ -72,7 +74,7 @@ router.beforeEach((to, from, next) => {
         next();
       }else{
         next({
-          path: '/',
+          path: '/login',
         });
       }
     });

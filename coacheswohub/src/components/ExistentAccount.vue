@@ -3,14 +3,14 @@
     <v-row dense align="center" justify="center" class="fill-height">
       <v-col cols="8">
         <p class="blueTec--text text-center text-h4 font-weight-bold">INICIO DE SESIÓN</p>
-        <v-text-field label="Correo Institucional" :rules="[rules.required, rules.format]" v-model="usuario" outlined></v-text-field>
+        <v-text-field label="Email" :rules="[rules.required, rules.email]" v-model="usuario" outlined></v-text-field>
         <v-text-field :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[rules.required, rules.min]"
+                      :rules="[rules.required,rules.length(8)]"
                       :type="showPass ? 'text' : 'password'"
                       name="input-10-2"
-                      hint="Al menos 6 caractéres"
+                      hint="At least 8 characters"
                       class="input-group--focused"
-                      @click:append="showPass = !showPass" label="Contraseña" v-model="clave" outlined></v-text-field>
+                      @click:append="showPass = !showPass" label="Password" v-model="clave" outlined></v-text-field>
         <v-dialog persistent v-model="dialog" width="600">
           <template v-slot:activator="{ dialog, attrs }">
             <v-btn block v-bind="attrs" v-on="dialog" color="blueTec" class="whiteTec--text" @click="signAccount">Iniciar sesión</v-btn>
@@ -46,10 +46,13 @@ export default {
       usuario:'',
       clave:'',
       rules: {
-        required: value => !!value || 'Valor requerido.',
-        min: v => v.length >= 6 || 'Min 6 caractéres',
-        format: v => /.+@.+/.test(v) || "El formato debe de ser válido",
-        //emailMatch: () => (`The email and password you entered don't match`),
+        required: value => !!value || 'Field Required',
+        length: len => v => (v || '').length >= len || `Invalid password length, required ${len}`,
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || 'Invalid Email.';
+        },
+
       },
     }
   },

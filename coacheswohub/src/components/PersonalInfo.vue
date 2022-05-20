@@ -39,7 +39,7 @@
         length: len => v => (v || '').length == len || `Invalid phone length, required ${len}`,
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || 'Invalid e-mail.';
+          return pattern.test(value) || 'Invalid Email.';
         },
         location: value =>{
           const pattern =/^[^,]*,[ a-zA-Z]+(?:\s+[a-zA-Z]+)*(?=[^,]*$)+.$/;

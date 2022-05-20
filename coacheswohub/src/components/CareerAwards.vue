@@ -1,35 +1,39 @@
 <template>
   <v-container>
     <v-row dense align="center" justify="center" class="fill-height">
-
       <v-col cols="6">
         <p class="blueTec--text text-center text-h4 font-weight-bold">CAREER AWARDS</p>
         <p class="blueTec--text text-left text-h5 font-weight-bold">CURRENT LIST</p>
         <v-row align="center" justify="center" class="fill-height">
-          <v-col cols="12" v-for="(career,index) in careerAwards" :key="index">
-
-            <v-text-field
-                :id="index.toString()"
-                type="text"
-                :value="career"
-                readonly
-                prepend-icon="mdi-delete"
-                prepend-inner-icon="mdi-menu"
-                :append-icon="showAppendIcon[index] ? 'mdi-check':''"
-                @click:prepend="deleteCareerAward(index)"
-                @click:prepend-inner = "enableInput(index)"
-                @click:append = "saveCareerAward(index)"
-            >
-            </v-text-field>
-          </v-col>
-          <v-col cols="10">
-            <p class="text-left text-h6 font-weight-bold">Add new info</p>
-            <v-text-field label="New Career"  v-model="newCareer" solo></v-text-field>
-            <v-btn block color="blueTec" class="whiteTec--text" @click="setCareer" >Save</v-btn>
+              <v-col cols="12" v-for="(career,index) in careerAwards" :key="index">
+                <v-form v-model="formValid">
+                  <v-text-field
+                      :id="index.toString()"
+                      type="text"
+                      :value="career"
+                      readonly
+                      outlined
+                      prepend-icon="mdi-delete"
+                      prepend-inner-icon="mdi-menu"
+                      :append-icon="showAppendIcon[index] && formValid ? 'mdi-check':''"
+                      @click:prepend="deleteCareerAward(index) "
+                      @click:prepend-inner = "enableInput(index) "
+                      @click:append = " saveCareerAward(index) "
+                      :rules="rules"
+                  >
+                  </v-text-field>
+                </v-form>
+              </v-col>
+              <v-col cols="10">
+                <p class="text-left text-h6 font-weight-bold">Add new info</p>
+                <v-form v-model="isFormValid">
+                  <v-text-field  label="New Career"  v-model="newCareer" :rules="rules" outlined></v-text-field>
+                  <v-btn block color="blueTec" class="whiteTec--text" @click="setCareer" :disabled="!isFormValid" >Save</v-btn>
+                </v-form>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -44,7 +48,12 @@ export default {
       careerAwards:[],
       newCareer:'',
       showAppendIcon:[],
-      careerInput:null
+      careerInput:null,
+      rules: [
+        value => !!value || 'Field Required'
+      ],
+      isFormValid: false,
+      formValid:false,
     }
   },
   mounted(){
@@ -68,6 +77,7 @@ export default {
     setCareer(){
       this.careerAwards.push(this.newCareer.toString());
       this.updateCareerAwards();
+      this.newCareer = "";
     },
     getUser(){
       return firebase.auth().currentUser;
@@ -85,7 +95,6 @@ export default {
       this.careerAwards.splice(index,1, this.careerInput.value);
       this.careerInput.setAttribute('readonly','true');
       this.showAppendIcon.splice(index,1,false);
-      console.log(this.careerAwards);
       this.updateCareerAwards();
     }
   }

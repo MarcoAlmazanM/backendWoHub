@@ -2,12 +2,14 @@
   <v-container>
     <v-row dense align="center" justify="center" class="fill-height">
       <v-col cols="8">
-        <p class="blueTec--text text-center text-h4 font-weight-bold">PERSONAL INFO</p>
-        <v-text-field label="Username" @change="usr" v-model="username" solo></v-text-field>
-        <v-text-field label="Correo" @change="mail" v-model="email" solo></v-text-field>
-        <v-text-field label="Teléfono" @change="tel" v-model="phone" solo></v-text-field>
-        <v-text-field label="Ubicación" @change="ubi" v-model="location" solo></v-text-field>
-        <v-btn block color="blueTec" class="whiteTec--text" @click="setInterests" >Actualizar información personal</v-btn>
+        <v-form v-model="isFormValid">
+          <p class="blueTec--text text-center text-h4 font-weight-bold">PERSONAL INFO</p>
+          <v-text-field label="Username" @change="usr" v-model="username" :rules="[rules.required,rules.username]" class="input-group--focused" outlined></v-text-field>
+          <v-text-field label="Correo" @change="mail" v-model="email" :rules="[rules.required, rules.email]" outlined></v-text-field>
+          <v-text-field label="Teléfono" @change="tel" v-model="phone" :rules="[rules.required, rules.length(10)]" outlined></v-text-field>
+          <v-text-field label="Ubicación" @change="ubi" v-model="location"  :rules="[rules.required, rules.location]" outlined></v-text-field>
+          <v-btn block color="blueTec" class="whiteTec--text" @click="setInterests" :disabled="!isFormValid">Actualizar información personal</v-btn>
+        </v-form>
       </v-col>
     </v-row>
   </v-container>
@@ -22,12 +24,29 @@
 
     name: "PersonalInfo",
     data: () => ({
-          username: '',
-          email: '',
-          phone: '',
-          location: '',
-          myarr: [],
-        }),
+      username: '',
+      email: '',
+      phone: '',
+      location: '',
+      myarr: [],
+      isFormValid:false,
+      rules: {
+        required: value => !!value || 'Field Required',
+        username: value=> {
+          const pattern = /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$/;
+          return pattern.test(value) || 'The username can contain dots,underscore but not at the start or the end, alphabets, numbers and the length needs to be between 8 and 30 characters.';
+        },
+        length: len => v => (v || '').length == len || `Invalid phone length, required ${len}`,
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || 'Invalid e-mail.';
+        },
+        location: value =>{
+          const pattern =/^[^,]*,[ a-zA-Z]+(?:\s+[a-zA-Z]+)*(?=[^,]*$)+.$/;
+          return pattern.test(value) || 'Please use the following format City,Country.';
+        }
+      }
+    }),
     mounted() {
 
       this.getStudentsInfo(firebase.auth().currentUser.email);

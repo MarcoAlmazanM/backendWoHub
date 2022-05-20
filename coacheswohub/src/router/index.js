@@ -41,7 +41,27 @@ const routes = [
     path: '/careerawards',
     name: 'CareerAwardsView',
     component: ()=> import(/* webpackChunkName: "CareerAwardsView" */ '../views/CareerAwardsView.vue')
-  }
+  },
+  {
+    path: '/workouts',
+    name: 'Workouts',
+    component: ()=> import(/* webpackChunkName: "Workouts" */ '../views/WorkoutsScreen.vue')
+  },
+  {
+    path: '/allwork',
+    name: 'AllWork',
+    component: ()=> import(/* webpackChunkName: "AllWork" */ '../views/AllWorkScreen.vue')
+  },
+  {
+    path: '/editwork',
+    name: 'EditWork',
+    component: ()=> import(/* webpackChunkName: "Workouts" */ '../views/EditWorkScreen.vue')
+  },
+  {
+    path: '/newwork',
+    name: 'NewWork',
+    component: ()=> import(/* webpackChunkName: "Workouts" */ '../views/NewWorkScreen.vue')
+  },
 ]
 
 const router = new VueRouter({

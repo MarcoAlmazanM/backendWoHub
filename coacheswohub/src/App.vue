@@ -6,7 +6,7 @@ Marco Antonio Almazán Martínez A01769046
 
     <PrincipalNavBar v-if="!log"></PrincipalNavBar>
     <Settings v-if="this.$route.path == '/careerawards' || this.$route.path == '/personal'|| this.$route.path == '/resume'"></Settings>
-
+    <Workouts v-if="this.$route.path == '/allwork' || this.$route.path == '/editwork'|| this.$route.path == '/newwork'"></Workouts>
     <v-navigation-drawer permanent app color="blueTec" v-if="log">
       <v-list dense>
       <v-header class="whiteTec--text text-h6 pa-16 ma-5">MENU</v-header>
@@ -17,6 +17,14 @@ Marco Antonio Almazán Martínez A01769046
           </v-list-item-icon>
           <v-list-item-content>
             <router-link  to="/home" style="text-decoration: none; "><v-list-item-title class="whiteTec--text text-body-1 ">Home</v-list-item-title></router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon class="whiteTec--text">mdi-dumbbell</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link  to="/workouts" style="text-decoration: none; "><v-list-item-title class="whiteTec--text text-body-1 ">Workouts</v-list-item-title></router-link>
           </v-list-item-content>
         </v-list-item>
         <v-list-item >
@@ -56,6 +64,7 @@ Marco Antonio Almazán Martínez A01769046
 import firebase from 'firebase';
 import Settings from "./components/Settings";
 import PrincipalNavBar from "./components/PrincipalNavBar";
+import Workouts from "@/components/Workouts";
 
 
 export default {
@@ -90,6 +99,7 @@ export default {
   },
 
   components: {
+    Workouts,
     PrincipalNavBar,
     Settings
 

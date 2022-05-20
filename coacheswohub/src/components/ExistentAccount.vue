@@ -3,17 +3,19 @@
     <v-row dense align="center" justify="center" class="fill-height">
       <v-col cols="8">
         <p class="blueTec--text text-center text-h4 font-weight-bold">INICIO DE SESIÓN</p>
-        <v-text-field label="Email" :rules="[rules.required, rules.email]" v-model="usuario" outlined></v-text-field>
-        <v-text-field :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[rules.required,rules.length(8)]"
-                      :type="showPass ? 'text' : 'password'"
-                      name="input-10-2"
-                      hint="At least 8 characters"
-                      class="input-group--focused"
-                      @click:append="showPass = !showPass" label="Password" v-model="clave" outlined></v-text-field>
+        <v-form v-model="isFormValid">
+          <v-text-field label="Email" :rules="[rules.required, rules.email]" v-model="usuario" outlined></v-text-field>
+          <v-text-field :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                        :rules="[rules.required,rules.length(8)]"
+                        :type="showPass ? 'text' : 'password'"
+                        name="input-10-2"
+                        hint="At least 8 characters"
+                        class="input-group--focused"
+                        @click:append="showPass = !showPass" label="Password" v-model="clave" outlined></v-text-field>
+        </v-form>
         <v-dialog persistent v-model="dialog" width="600">
           <template v-slot:activator="{ dialog, attrs }">
-            <v-btn block v-bind="attrs" v-on="dialog" color="blueTec" class="whiteTec--text" @click="signAccount">Iniciar sesión</v-btn>
+            <v-btn block v-bind="attrs" v-on="dialog" color="blueTec" class="whiteTec--text" @click="signAccount" :disabled="!isFormValid">Iniciar sesión</v-btn>
           </template>
           <!--Cuadro de dialogo-->
           <v-card v-show="dialog">
@@ -45,6 +47,7 @@ export default {
       message:"",
       usuario:'',
       clave:'',
+      isFormValid:false,
       rules: {
         required: value => !!value || 'Field Required',
         length: len => v => (v || '').length >= len || `Invalid password length, required ${len}`,
